@@ -52,6 +52,49 @@ pool their text (`--n-hyde`, which needs a sampling backend to actually differ).
 Self-RAG and CRAG fix things *after* retrieval; HyDE fixes the retrieval *query*
 itself — so it composes with them.
 
+## Where HyDE helps
+
+HyDE earns its extra generation call exactly when **the query and the relevant
+documents don't share words**. Good fits:
+
+- **Zero-shot / cold-start retrieval.** A brand-new corpus with no click logs or
+  labelled query–document pairs to train a retriever on. This is the paper's headline
+  result: HyDE rivals *fine-tuned* retrievers using **zero** relevance labels.
+- **Lay users over a technical corpus.** Support knowledge bases, API docs,
+  medical/legal/financial references — someone asks *"why does my money buy less?"*
+  but the document says *"inflation."* The hypothetical answer supplies the jargon.
+- **Short or keyword-style queries.** Voice search, search boxes, one-liners: too few
+  terms for lexical or dense retrieval to lock onto, until a generated passage fleshes
+  them out.
+- **Question-shaped queries over statement-shaped documents.** Wikis, manuals, and
+  encyclopedias are written as statements; HyDE rewrites the question *as* a statement
+  that matches them.
+- **Multilingual / cross-lingual retrieval.** The paper reports gains across languages
+  — generate the hypothetical document in the corpus's language.
+- **A drop-in front-end to any RAG stack.** HyDE only changes the *retrieval query*, so
+  it slots in ahead of [self_rag](https://github.com/MONISMALIK1/self_rag),
+  [corrective_rag](https://github.com/MONISMALIK1/corrective_rag), or a reranker without
+  touching them.
+
+### When to skip it
+
+- **Queries already share the corpus vocabulary** (exact keyword search, code-symbol
+  lookup) — HyDE adds latency for little gain.
+- **Tight latency or cost budgets** — it's one extra LLM call (`--n-hyde` adds more)
+  before retrieval even starts.
+- **A weak base model** — a vague or wrong hypothetical can pull retrieval *off* target;
+  HyDE is only as good as the answer the model can imagine.
+
+### A concrete win
+
+Run the bundled benchmark to see it on vocabulary-mismatch questions — everyday
+phrasings (*"what does it mean when a web page says it can't be found?"*) whose gold
+documents use the technical term (*"HTTP 404"*):
+
+```bash
+python -m hyde --bench     # retrieval@k: raw query vs HyDE, side by side
+```
+
 ## Install
 
 No third-party dependencies. Python 3.11+.
