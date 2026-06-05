@@ -120,6 +120,20 @@ uses the document's vocabulary surfaces it.
 - **Extra generation cost.** HyDE adds one (or `--n-hyde`) generation call before
   retrieval — worth it when raw retrieval is the bottleneck, wasteful when it isn't.
 
+## Part of a series
+
+From-scratch, dependency-free reimplementations of LLM-reasoning & RAG papers:
+[rag](https://github.com/MONISMALIK1/rag) ·
+[self_rag](https://github.com/MONISMALIK1/self_rag) ·
+[corrective_rag](https://github.com/MONISMALIK1/corrective_rag) ·
+[react_agent](https://github.com/MONISMALIK1/react_agent) ·
+[reflexion](https://github.com/MONISMALIK1/reflexion) ·
+[pal](https://github.com/MONISMALIK1/pal) ·
+[self_consistency](https://github.com/MONISMALIK1/self_consistency) ·
+[self_discover](https://github.com/MONISMALIK1/self_discover) ·
+[tree_of_thoughts](https://github.com/MONISMALIK1/tree_of_thoughts) ·
+**hyde** (this repo).
+
 ## License
 
 MIT
