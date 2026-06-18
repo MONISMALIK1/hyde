@@ -1,6 +1,10 @@
+<p align="center"><img src="assets/hero.svg" alt="HyDE — Hypothetical Document Embeddings" width="100%"></p>
+
 # hyde
 
 [![tests](https://github.com/MONISMALIK1/hyde/actions/workflows/test.yml/badge.svg)](https://github.com/MONISMALIK1/hyde/actions/workflows/test.yml)
+
+<p align="center"><img src="assets/pipeline.svg" alt="HyDE pipeline: query to LLM-written hypothetical to real documents to cited answer" width="100%"></p>
 
 A from-scratch, dependency-free implementation of **HyDE** — *Hypothetical Document
 Embeddings*. Instead of searching with the user's short query, HyDE first asks the
